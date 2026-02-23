@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Berkah Decoration — Jasa tekstur dinding profesional. Cat kamprot, motif gosok, cat wash, finishing dekoratif interior & eksterior. Harga mulai Rp 140.000/m²." />
+  <meta name="theme-color" content="#1a0f00" />
+  <title>Berkah Decoration — Jasa Tekstur Dinding Profesional</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+  <!-- Google Fonts: 3 typefaces -->
+  <!-- Display: Playfair Display — Elegan, berkarakter, cocok dekorasi -->
+  <!-- Body: DM Sans — Bersih, modern, readable -->
+  <!-- Accent/Label: Bebas Neue — Bold, industrial, impactful -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Alpine.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js" defer></script>
+
+  <style>
+      /* ============================================================
+     BERKAH DECORATION — style.css
+     Design Tokens, Base, Layout, Components
+     ============================================================ */
+  
+  /* ---- Design Tokens ---- */
+  :root {
+    /* Colors */
+    --c-bg:          #0e0a05;
+    --c-bg-2:        #150e06;
+    --c-bg-card:     #1c1208;
+    --c-surface:     #231607;
+    --c-border:      rgba(180, 120, 40, 0.18);
+    --c-border-soft: rgba(180, 120, 40, 0.08);
+  
+    /* Brand palette */
+    --c-gold:        #c8893a;
+    --c-gold-light:  #e0a84e;
+    --c-gold-dim:    rgba(200, 137, 58, 0.15);
+    --c-terracotta:  #b85c38;
+    --c-cream:       #f5ede0;
+    --c-cream-dim:   rgba(245, 237, 224, 0.7);
+  
+    /* Text */
+    --c-text:        #f0e6d3;
+    --c-text-2:      #b8a48a;
+    --c-text-3:      #7a6a52;
+    --c-text-inv:    #0e0a05;
+  
+    /* Fonts */
+    --f-display:     'Playfair Display', Georgia, serif;
+    --f-body:        'DM Sans', system-ui, sans-serif;
+    --f-label:       'Bebas Neue', Impact, sans-serif;
+  
+    /* Spacing scale */
+    --sp-xs:   0.5rem;
+    --sp-sm:   1rem;
+    --sp-md:   1.75rem;
+    --sp-lg:   3rem;
+    --sp-xl:   5rem;
+    --sp-2xl:  8rem;
+  
+    /* Radii */
+    --r-sm:  6px;
+    --r-md:  12px;
+    --r-lg:  20px;
+    --r-xl:  32px;
+  
+    /* Transitions */
+    --t-fast:   0.18s ease;
+    --t-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --t-slow:   0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  
+    /* Shadows */
+    --shadow-card: 0 4px 32px rgba(0,0,0,0.5);
+    --shadow-glow: 0 0 40px rgba(200, 137, 58, 0.15);
+  
+    /* Z-index layers */
+    --z-nav:       100;
+    --z-sidebar:   200;
+    --z-overlay:   150;
+  }
+  
+  /* ---- Reset & Base ---- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    font-family: var(--f-body);
+    background: var(--c-bg);
+    color: var(--c-text);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button { border: none; background: none; cursor: pointer; font: inherit; }
+  
+  /* ---- Skip link (a11y) ---- */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    z-index: 9999;
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-sm);
+  }
+  
+  /* ---- Typography ---- */
+  h1, h2, h3, h4 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--c-cream);
+  }
+  
+  h1 { font-size: clamp(2.4rem, 6vw, 5.5rem); }
+  h2 { font-size: clamp(2rem, 4.5vw, 3.6rem); }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+  
+  em { font-style: italic; color: var(--c-gold-light); }
+  
+  /* ---- Layout helpers ---- */
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+  
+  .section {
+    padding-block: var(--sp-2xl);
+  }
+  
+  .desktop-only { display: none; }
+  @media (min-width: 900px) { .desktop-only { display: inline; } }
+  
+  /* ---- Section Header ---- */
+  .section-header {
+    text-align: center;
+    max-width: 680px;
+    margin-inline: auto;
+    margin-bottom: var(--sp-xl);
+  }
+  
+  .section-eyebrow {
+    font-family: var(--f-label);
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
+    color: var(--c-gold);
+    margin-bottom: var(--sp-xs);
+    text-transform: uppercase;
+  }
+  
+  .section-eyebrow.light { color: var(--c-gold-light); }
+  
+  .section-title { margin-bottom: var(--sp-sm); }
+  
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--c-text-2);
+    max-width: 520px;
+    margin-inline: auto;
+  }
+  
+  /* ---- Buttons ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    border-radius: 3px;
+    font-family: var(--f-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: var(--t-smooth);
+    white-space: nowrap;
+  }
+  
+  .btn--primary {
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+    box-shadow: 0 4px 20px rgba(200,137,58,0.35);
+  }
+  .btn--primary:hover {
+    background: var(--c-gold-light);
+    box-shadow: 0 6px 28px rgba(200,137,58,0.5);
+    transform: translateY(-2px);
+  }
+  
+  .btn--ghost {
+    background: transparent;
+    color: var(--c-cream);
+    border: 1.5px solid rgba(245,237,224,0.35);
+  }
+  .btn--ghost:hover {
+    border-color: var(--c-cream);
+    background: rgba(245,237,224,0.07);
+    transform: translateY(-2px);
+  }
+  
+  .btn--outline {
+    background: transparent;
+    color: var(--c-gold);
+    border: 1.5px solid var(--c-gold);
+  }
+  .btn--outline:hover {
+    background: var(--c-gold-dim);
+    transform: translateY(-2px);
+  }
+  
+  .btn--large {
+    padding: 1rem 2.5rem;
+    font-size: 1.05rem;
+  }
+  
+  .btn--compact {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* ============================================================
+     NAVBAR
+     ============================================================ */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: var(--z-nav);
+    transition: background var(--t-smooth), box-shadow var(--t-smooth), border-bottom var(--t-smooth);
+  }
+  
+  /* Saat di paling atas — menyatu dengan hero, transparan */
+  .navbar--top {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    box-shadow: none;
+  }
+  
+  /* Saat scroll — solid dark */
+  .navbar--scrolled {
+    background: rgba(14, 10, 5, 0.96);
+    border-bottom: 1px solid var(--c-border);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+  
+  /* Brand */
+  .navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    transition: opacity var(--t-fast);
+  }
+  .navbar__brand:hover { opacity: 0.85; }
+  
+  .brand-icon {
+    font-size: 1.35rem;
+    color: var(--c-gold);
+  }
+  
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+  .brand-main {
+    font-family: var(--f-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--c-cream);
+    letter-spacing: -0.01em;
+  }
+  .brand-sub {
+    font-family: var(--f-label);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    color: var(--c-gold);
+    text-transform: uppercase;
+  }
+  
+  /* Desktop nav links */
+  .navbar__links {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .navbar__links { display: flex; }
+    .navbar__burger { display: none; }
+  }
+  
+  .nav-link {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--c-text-2);
+    border-radius: var(--r-sm);
+    transition: color var(--t-fast), background var(--t-fast);
+  }
+  .nav-link:hover {
+    color: var(--c-cream);
+    background: rgba(245,237,224,0.06);
+  }
+  
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.25rem;
+    margin-left: 0.5rem;
+    border-radius: 3px;
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: var(--t-smooth);
+  }
+  .nav-cta:hover {
+    background: var(--c-gold-light);
+    transform: translateY(-1px);
+  }
+  
+  /* Hamburger */
+  .navbar__burger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.5rem;
+    z-index: var(--z-nav);
+  }
+  .burger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--c-cream);
+    border-radius: 2px;
+    transition: var(--t-smooth);
+    transform-origin: center;
+  }
+  .burger-line:nth-child(1).active { transform: rotate(45deg) translate(5px, 5px); }
+  .burger-line:nth-child(2).active { opacity: 0; transform: scaleX(0); }
+  .burger-line:nth-child(3).active { transform: rotate(-45deg) translate(5px, -5px); }
+  
+  @media (min-width: 1024px) { .navbar__burger { display: none; } }
+  
+  /* ============================================================
+     MOBILE SIDEBAR
+     ============================================================ */
+  .sidebar {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-sidebar);
+    pointer-events: none;
+  }
+  .sidebar--open { pointer-events: auto; }
+  
+  .sidebar__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    opacity: 0;
+    transition: opacity var(--t-smooth);
+    backdrop-filter: blur(4px);
+  }
+  .sidebar--open .sidebar__overlay { opacity: 1; }
+  
+  .sidebar__panel {
+    position: absolute;
+    top: 0; right: 0;
+    width: min(320px, 85vw);
+    height: 100%;
+    background: var(--c-bg-2);
+    border-left: 1px solid var(--c-border);
+    padding: var(--sp-lg) var(--sp-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-md);
+    transform: translateX(100%);
+    transition: transform var(--t-slow);
+  }
+  .sidebar--open .sidebar__panel { transform: translateX(0); }
+  
+  .sidebar__close {
+    align-self: flex-end;
+    font-size: 1.35rem;
+    color: var(--c-text-2);
+    padding: 0.35rem;
+    transition: color var(--t-fast);
+  }
+  .sidebar__close:hover { color: var(--c-cream); }
+  
+  .sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding-bottom: var(--sp-md);
+    border-bottom: 1px solid var(--c-border-soft);
+  }
+  
+  .sidebar__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+  
+  .sidebar__links li a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--r-sm);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--c-text-2);
+    transition: color var(--t-fast), background var(--t-fast);
+  }
+  .sidebar__links li a:hover {
+    color: var(--c-cream);
+    background: rgba(245,237,224,0.05);
+  }
+  .sidebar__links li a i { color: var(--c-gold); width: 20px; }
+  
+  .sidebar__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-radius: var(--r-sm);
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--t-smooth);
+  }
+  .sidebar__cta:hover { background: var(--c-gold-light); }
+  
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .hero__video-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  
+  /* Karena no actual video file, pakai full background image */
+  .hero__bg-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    /* Subtle parallax handled via JS */
+  }
+  
+  .hero__video {
+    display: none; /* jika ada video asli, unhide & remove bg-img */
+  }
+  
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 6, 2, 0.88) 0%,
+      rgba(20, 12, 4, 0.72) 50%,
+      rgba(30, 18, 6, 0.55) 100%
+    );
+  }
+  
+  /* Floating texture badges */
+  .hero__badge {
+    position: absolute;
+    z-index: 5;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--c-border);
+    background: rgba(14, 10, 5, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 2px;
+  }
+  
+  .badge-label {
+    font-family: var(--f-label);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    color: var(--c-gold);
+  }
+  
+  .hero__badge--1 { top: 22%; right: 6%; }
+  .hero__badge--2 { top: 52%; right: 10%; }
+  .hero__badge--3 { top: 70%; right: 4%; }
+  
+  @media (max-width: 768px) {
+    .hero__badge { display: none; }
+  }
+  
+  /* Hero content */
+  .hero__content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    padding-top: 120px;
+    padding-bottom: var(--sp-xl);
+  }
+  
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0; /* GSAP will animate */
+  }
+  
+  .eyebrow-line {
+    display: block;
+    width: 40px;
+    height: 1.5px;
+    background: var(--c-gold);
+  }
+  
+  .eyebrow-text {
+    font-family: var(--f-label);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--c-gold);
+    text-transform: uppercase;
+  }
+  
+  .hero__headline {
+    margin-bottom: var(--sp-sm);
+    opacity: 0; /* GSAP will animate */
+    text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  
+  .hero__sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: var(--c-cream-dim);
+    max-width: 560px;
+    margin-bottom: var(--sp-md);
+    line-height: 1.7;
+    opacity: 0; /* GSAP will animate */
+  }
+  
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: var(--sp-xl);
+    opacity: 0; /* GSAP will animate */
+  }
+  
+  .hero__stats {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-md);
+    opacity: 0; /* GSAP will animate */
+  }
+  
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-item strong {
+    font-family: var(--f-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--c-gold-light);
+    line-height: 1;
+  }
+  .stat-item span {
+    font-size: 0.78rem;
+    color: var(--c-text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+  }
+  
+  .stat-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--c-border);
+  }
+  
+  /* Scroll hint */
+  .hero__scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--c-text-3);
+    font-family: var(--f-label);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+  
+  .scroll-mouse {
+    width: 20px;
+    height: 32px;
+    border: 1.5px solid var(--c-text-3);
+    border-radius: 10px;
+    position: relative;
+  }
+  .scroll-mouse::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    width: 3px;
+    height: 6px;
+    background: var(--c-gold);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    animation: scrollDot 1.8s ease-in-out infinite;
+  }
+  
+  @keyframes scrollDot {
+    0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  }
+  
+  /* ============================================================
+     GALLERY — MASONRY
+     ============================================================ */
+  .gallery-section {
+    background: var(--c-bg-2);
+  }
+  
+  /* Masonry layout menggunakan CSS Grid column-based */
+  .masonry-grid {
+    columns: 3;
+    column-gap: 12px;
+    orphans: 1;
+    widows: 1;
+  }
+  
+  @media (max-width: 900px) { .masonry-grid { columns: 2; } }
+  @media (max-width: 540px) { .masonry-grid { columns: 1; } }
+  
+  .masonry-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    cursor: pointer;
+    display: block;
+  }
+  
+  /* Foto jpg — tanpa wrapper/card/background */
+  .masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--t-slow);
+  }
+  .masonry-item:hover img { transform: scale(1.04); }
+  
+  .masonry-item--tall img { aspect-ratio: 3/4; object-fit: cover; }
+  .masonry-item--wide { column-span: none; }
+  
+  .masonry-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2.5rem 1rem 0.85rem;
+    background: linear-gradient(transparent, rgba(14,10,5,0.85));
+    font-family: var(--f-label);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--c-cream);
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity var(--t-smooth);
+  }
+  .masonry-item:hover .masonry-caption { opacity: 1; }
+  
+  .gallery-cta {
+    text-align: center;
+    margin-top: var(--sp-lg);
+  }
+  
+  /* ============================================================
+     CTA BANNER
+     ============================================================ */
+  .cta-banner {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--sp-2xl);
+  }
+  
+  .cta-banner__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .cta-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 10, 5, 0.86);
+  }
+  
+  .cta-banner__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-lg);
+    align-items: start;
+  }
+  
+  @media (min-width: 900px) {
+    .cta-banner__inner {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+    .cta-banner__action {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+  }
+  
+  .cta-banner__title {
+    margin-bottom: 1rem;
+  }
+  .cta-banner__desc {
+    color: var(--c-text-2);
+    font-size: 1.05rem;
+    max-width: 480px;
+  }
+  
+  .cta-banner__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  
+  .apply-card {
+    padding: 1.5rem;
+    border: 1px solid var(--c-border);
+    background: rgba(35, 22, 7, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: var(--r-sm);
+    transition: var(--t-smooth);
+  }
+  .apply-card:hover {
+    border-color: var(--c-gold);
+    background: rgba(200, 137, 58, 0.08);
+    transform: translateY(-3px);
+  }
+  
+  .apply-card__icon {
+    font-size: 1.5rem;
+    color: var(--c-gold);
+    margin-bottom: 0.75rem;
+  }
+  .apply-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-cream);
+    margin-bottom: 0.35rem;
+    font-family: var(--f-body);
+  }
+  .apply-card p {
+    font-size: 0.82rem;
+    color: var(--c-text-3);
+  }
+  
+  /* ============================================================
+     SERVICES
+     ============================================================ */
+  .services-section {
+    background: var(--c-bg);
+  }
+  
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2xl);
+  }
+  
+  .service-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    overflow: hidden;
+    min-height: 440px;
+  }
+  
+  .service-card--reverse { direction: rtl; }
+  .service-card--reverse > * { direction: ltr; }
+  
+  @media (max-width: 768px) {
+    .service-card,
+    .service-card--reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+  }
+  
+  .service-card__media {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* foto jpg — tanpa card/border/margin */
+  .service-card__media img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    transition: transform var(--t-slow);
+  }
+  .service-card:hover .service-card__media img {
+    transform: scale(1.04);
+  }
+  
+  .service-card__body {
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--c-bg-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.1rem;
+    border: 1px solid var(--c-border-soft);
+  }
+  
+  .service-number {
+    font-family: var(--f-label);
+    font-size: 3.5rem;
+    color: var(--c-gold-dim);
+    line-height: 1;
+    border: none;
+    display: block;
+  }
+  
+  .service-card__body h3 {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color: var(--c-cream);
+  }
+  
+  .service-card__body p {
+    color: var(--c-text-2);
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+  
+  .service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .service-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--c-text-2);
+  }
+  .service-list li i { color: var(--c-gold); font-size: 0.8rem; }
+  
+  .service-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--c-gold);
+    margin-top: 0.5rem;
+    transition: gap var(--t-fast), color var(--t-fast);
+  }
+  .service-card__cta:hover {
+    gap: 0.85rem;
+    color: var(--c-gold-light);
+  }
+  
+  /* ============================================================
+     PRICING
+     ============================================================ */
+  .pricing-section {
+    background: var(--c-bg-2);
+  }
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+  
+  .pricing-card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-sm);
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: var(--t-smooth);
+  }
+  .pricing-card:hover {
+    border-color: var(--c-gold);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .pricing-card--featured {
+    border-color: var(--c-gold);
+    background: linear-gradient(160deg, var(--c-surface) 0%, rgba(200,137,58,0.06) 100%);
+    position: relative;
+  }
+  .pricing-card--featured::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-terracotta), var(--c-gold), var(--c-gold-light));
+    border-radius: var(--r-sm) var(--r-sm) 0 0;
+  }
+  
+  .pkg-badge {
+    display: inline-block;
+    padding: 0.28rem 0.75rem;
+    border-radius: 2px;
+    font-family: var(--f-label);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    background: var(--c-border);
+    color: var(--c-text-2);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+  .pkg-badge--featured {
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+  }
+  .pkg-badge--premium {
+    background: var(--c-terracotta);
+    color: var(--c-cream);
+  }
+  
+  .pricing-card__top h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .pkg-desc {
+    font-size: 0.88rem;
+    color: var(--c-text-2);
+    line-height: 1.6;
+  }
+  
+  .pricing-card__price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    padding-block: 0.5rem;
+    border-top: 1px solid var(--c-border-soft);
+    border-bottom: 1px solid var(--c-border-soft);
+  }
+  .price-currency {
+    font-family: var(--f-body);
+    font-size: 1rem;
+    color: var(--c-gold);
+    font-weight: 600;
+  }
+  .price-amount {
+    font-family: var(--f-display);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--c-cream);
+    line-height: 1;
+  }
+  .price-unit {
+    font-size: 0.85rem;
+    color: var(--c-text-3);
+  }
+  
+  .pricing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    flex: 1;
+  }
+  .pricing-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--c-text-2);
+  }
+  .pricing-list li i { color: var(--c-gold); font-size: 0.8rem; }
+  .pricing-list li.muted { color: var(--c-text-3); }
+  .pricing-list li.muted i { color: var(--c-text-3); }
+  
+  .pricing-card__cta {
+    display: block;
+    text-align: center;
+    padding: 0.85rem;
+    border: 1.5px solid var(--c-gold);
+    border-radius: 3px;
+    color: var(--c-gold);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--t-smooth);
+  }
+  .pricing-card__cta:hover {
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+  }
+  .pricing-card__cta--featured {
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+  }
+  .pricing-card__cta--featured:hover {
+    background: var(--c-gold-light);
+  }
+  
+  .pricing-note {
+    text-align: center;
+    margin-top: var(--sp-lg);
+    font-size: 0.88rem;
+    color: var(--c-text-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .pricing-note i { color: var(--c-gold); }
+  
+  /* ============================================================
+     ABOUT
+     ============================================================ */
+  .about-section {
+    background: var(--c-bg);
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  
+  .about-visual {
+    position: relative;
+  }
+  
+  .about-img-main {
+    overflow: hidden;
+  }
+  /* foto jpg — tanpa wrapper background */
+  .about-img-main img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .about-img-accent {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 200px;
+    overflow: hidden;
+    border: 4px solid var(--c-bg);
+  }
+  .about-img-accent img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 768px) {
+    .about-img-accent { display: none; }
+  }
+  
+  .about-pill {
+    position: absolute;
+    top: 2rem;
+    left: -1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--c-gold);
+    color: var(--c-text-inv);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+  }
+  .about-pill strong {
+    font-family: var(--f-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--c-text-inv);
+  }
+  .about-pill span {
+    font-size: 0.72rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 768px) {
+    .about-pill { left: 1rem; top: 1rem; }
+  }
+  
+  .about-content { display: flex; flex-direction: column; gap: 1rem; }
+  .about-content .section-title { text-align: left; margin: 0; }
+  
+  .about-lead {
+    font-family: var(--f-display);
+    font-size: 1.15rem;
+    color: var(--c-cream-dim);
+    line-height: 1.65;
+    font-style: italic;
+  }
+  
+  .about-body {
+    color: var(--c-text-2);
+    font-size: 0.97rem;
+    line-height: 1.75;
+  }
+  
+  .about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .value-item > i {
+    font-size: 1.1rem;
+    color: var(--c-gold);
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .value-item div {
+    display: flex;
+    flex-direction: column;
+  }
+  .value-item strong {
+    color: var(--c-cream);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .value-item span {
+    color: var(--c-text-3);
+    font-size: 0.85rem;
+  }
+  
+  .about-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.5rem;
+  }
+  
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--c-border);
+    border-radius: 2px;
+    font-size: 0.85rem;
+    color: var(--c-text-2);
+    transition: var(--t-smooth);
+  }
+  .contact-pill i { color: var(--c-gold); }
+  .contact-pill:hover {
+    border-color: var(--c-gold);
+    color: var(--c-cream);
+    background: var(--c-gold-dim);
+  }
+  
+  /* ============================================================
+     FAQ
+     ============================================================ */
+  .faq-section {
+    background: var(--c-bg-2);
+  }
+  
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+  
+  @media (max-width: 768px) {
+    .faq-layout { grid-template-columns: 1fr; }
+  }
+  
+  .faq-intro { position: sticky; top: 100px; }
+  .faq-intro .section-title { text-align: left; margin-bottom: 1rem; }
+  .faq-intro__desc {
+    color: var(--c-text-2);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  
+  .faq-list { display: flex; flex-direction: column; gap: 1px; }
+  
+  .faq-item {
+    border-top: 1px solid var(--c-border-soft);
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--c-border-soft); }
+  
+  .faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1.4rem 0;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-cream);
+    font-family: var(--f-body);
+    transition: color var(--t-fast);
+  }
+  .faq-question:hover { color: var(--c-gold-light); }
+  
+  .faq-icon {
+    font-size: 0.75rem;
+    color: var(--c-gold);
+    transition: transform var(--t-smooth);
+    flex-shrink: 0;
+  }
+  .faq-item--open .faq-icon { transform: rotate(180deg); }
+  
+  .faq-answer {
+    padding-bottom: 1.4rem;
+  }
+  .faq-answer p {
+    color: var(--c-text-2);
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  
+  /* Alpine transition classes */
+  .faq-enter { transition: opacity 0.25s ease, transform 0.25s ease; }
+  .faq-enter-start { opacity: 0; transform: translateY(-8px); }
+  .faq-enter-end { opacity: 1; transform: translateY(0); }
+  .faq-leave { transition: opacity 0.2s ease; }
+  .faq-leave-start { opacity: 1; }
+  .faq-leave-end { opacity: 0; }
+  
+  /* ============================================================
+     FINAL CTA
+     ============================================================ */
+  .final-cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--sp-2xl);
+  }
+  
+  .final-cta__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .final-cta__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,6,2,0.92), rgba(14,10,5,0.85));
+  }
+  
+  .final-cta__inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-md);
+  }
+  
+  .final-cta__title { max-width: 640px; }
+  .final-cta__desc {
+    color: var(--c-text-2);
+    font-size: 1.05rem;
+    max-width: 540px;
+  }
+  
+  .final-cta__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .final-cta__meta {
+    display: flex;
+    gap: var(--sp-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+  .final-cta__meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--c-text-3);
+  }
+  .final-cta__meta i { color: var(--c-gold); }
+  
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    background: #080502;
+    border-top: 1px solid var(--c-border-soft);
+    padding-block: var(--sp-lg);
+  }
+  
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-md);
+    text-align: center;
+  }
+  
+  .footer__links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .footer__links a {
+    font-size: 0.88rem;
+    color: var(--c-text-3);
+    transition: color var(--t-fast);
+  }
+  .footer__links a:hover { color: var(--c-cream); }
+  
+  .footer__social {
+    display: flex;
+    gap: 1rem;
+  }
+  .footer__social a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--c-border);
+    border-radius: 50%;
+    color: var(--c-text-3);
+    font-size: 0.9rem;
+    transition: var(--t-smooth);
+  }
+  .footer__social a:hover {
+    border-color: var(--c-gold);
+    color: var(--c-gold);
+    background: var(--c-gold-dim);
+  }
+  
+  .footer__copy {
+    font-size: 0.82rem;
+    color: var(--c-text-3);
+  }
+  
+  /* ============================================================
+     SCROLL REVEAL — GSAP base states
+     ============================================================ */
+  .reveal-up {
+    opacity: 0;
+    transform: translateY(36px);
+    filter: blur(4px);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    filter: blur(4px);
+  }
+  .reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    filter: blur(4px);
+  }
+  
+  /* ============================================================
+     RESPONSIVE — fine-tuning
+     ============================================================ */
+  @media (max-width: 480px) {
+    .hero__actions { flex-direction: column; }
+    .hero__stats { gap: var(--sp-sm); }
+    .stat-item strong { font-size: 1.4rem; }
+    .cta-banner__cards { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .final-cta__actions { flex-direction: column; align-items: stretch; }
+    .final-cta__actions .btn { justify-content: center; }
+  }
+  
+  @media print {
+    .navbar, .sidebar, .hero__scroll-hint, .hero__badge,
+    .final-cta, .footer__social { display: none; }
+    body { background: white; color: black; }
+  }
+
+  </style>
+</head>
+<body x-data="appState()" @scroll.window="handleScroll()">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" :class="{ 'navbar--top': atTop, 'navbar--scrolled': !atTop }" role="banner">
+    <div class="navbar__inner">
+      <a href="#hero" class="navbar__brand" aria-label="Berkah Decoration Home">
+        <span class="brand-icon"><i class="fa-solid fa-house-chimney"></i></span>
+        <span class="brand-text">
+          <span class="brand-main">Berkah</span>
+          <span class="brand-sub">Decoration</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="navbar__links" aria-label="Navigasi utama">
+        <a href="#gallery" class="nav-link">Galeri</a>
+        <a href="#services" class="nav-link">Layanan</a>
+        <a href="#pricing" class="nav-link">Harga</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="https://wa.me/6285137961950" target="_blank" rel="noopener" class="nav-cta">
+          <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+        </a>
+      </nav>
+
+      <!-- Hamburger -->
+      <button class="navbar__burger" @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()" aria-controls="mobile-sidebar" aria-label="Buka menu">
+        <span class="burger-line" :class="{ 'active': mobileOpen }"></span>
+        <span class="burger-line" :class="{ 'active': mobileOpen }"></span>
+        <span class="burger-line" :class="{ 'active': mobileOpen }"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== MOBILE SIDEBAR ===================== -->
+  <aside id="mobile-sidebar" class="sidebar" :class="{ 'sidebar--open': mobileOpen }" aria-hidden="!mobileOpen" role="dialog" aria-label="Menu navigasi mobile">
+    <div class="sidebar__overlay" @click="mobileOpen = false"></div>
+    <nav class="sidebar__panel">
+      <button class="sidebar__close" @click="mobileOpen = false" aria-label="Tutup menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="sidebar__brand">
+        <span class="brand-icon"><i class="fa-solid fa-house-chimney"></i></span>
+        <span class="brand-text">
+          <span class="brand-main">Berkah</span>
+          <span class="brand-sub">Decoration</span>
+        </span>
+      </div>
+      <ul class="sidebar__links">
+        <li><a href="#gallery" @click="mobileOpen = false"><i class="fa-regular fa-images"></i> Galeri</a></li>
+        <li><a href="#services" @click="mobileOpen = false"><i class="fa-solid fa-brush"></i> Layanan</a></li>
+        <li><a href="#pricing" @click="mobileOpen = false"><i class="fa-solid fa-tag"></i> Harga</a></li>
+        <li><a href="#about" @click="mobileOpen = false"><i class="fa-solid fa-circle-info"></i> Tentang</a></li>
+        <li><a href="#faq" @click="mobileOpen = false"><i class="fa-regular fa-circle-question"></i> FAQ</a></li>
+      </ul>
+      <a href="https://wa.me/6285137961950" target="_blank" rel="noopener" class="sidebar__cta">
+        <i class="fa-brands fa-whatsapp"></i> Chat WhatsApp
+      </a>
+    </nav>
+  </aside>
+
+  <main id="main">
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero" class="hero" aria-label="Beranda">
+      <!-- Video background -->
+      <div class="hero__video-wrap" aria-hidden="true">
+        <video class="hero__video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80">
+          <!-- Fallback ke Unsplash image karena no video file -->
+        </video>
+        <div class="hero__bg-img" style="background-image:url('https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=1920&q=80&auto=format&fit=crop')"></div>
+        <div class="hero__overlay" aria-hidden="true"></div>
+      </div>
+
+      <!-- Floating texture badges -->
+      <div class="hero__badge hero__badge--1" aria-hidden="true">
+        <span class="badge-label">Kamprot</span>
+      </div>
+      <div class="hero__badge hero__badge--2" aria-hidden="true">
+        <span class="badge-label">Gosok</span>
+      </div>
+      <div class="hero__badge hero__badge--3" aria-hidden="true">
+        <span class="badge-label">Cat Wash</span>
+      </div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow" id="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-text">Jasa Tekstur Dinding Profesional</span>
+        </div>
+        <h1 class="hero__headline" id="hero-headline">
+          Wujudkan Ruang<br />
+          <em>yang Berkarakter</em>
+        </h1>
+        <p class="hero__sub" id="hero-sub">
+          Dari tekstur kamprot kasar hingga gosok halus elegan —<br class="desktop-only" />
+          kami hadir untuk mengubah dinding biasa menjadi karya.
+        </p>
+        <div class="hero__actions" id="hero-actions">
+          <a href="https://wa.me/6285137961950?text=Halo%20Berkah%20Decoration%2C%20saya%20tertarik%20dengan%20layanan%20tekstur%20dinding.%20Boleh%20konsultasi%3F" target="_blank" rel="noopener" class="btn btn--primary">
+            <i class="fa-brands fa-whatsapp"></i> Konsultasi Gratis
+          </a>
+          <a href="#gallery" class="btn btn--ghost">
+            Lihat Portofolio <i class="fa-solid fa-arrow-down"></i>
+          </a>
+        </div>
+        <div class="hero__stats" id="hero-stats">
+          <div class="stat-item">
+            <strong>500+</strong>
+            <span>Proyek Selesai</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <strong>7+</strong>
+            <span>Tahun Pengalaman</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat-item">
+            <strong>100%</strong>
+            <span>Garansi Amanah</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <div class="scroll-mouse"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ===================== GALLERY SECTION ===================== -->
+    <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <p class="section-eyebrow">Portofolio Nyata</p>
+          <h2 class="section-title" id="gallery-title">Hasil Kerja Kami<br /><em>Berbicara Sendiri</em></h2>
+          <p class="section-desc">Setiap proyek dikerjakan dengan ketelitian tinggi. Ini bukan sekadar cat — ini seni tekstur.</p>
+        </div>
+
+        <!-- Masonry Gallery Grid -->
+        <div class="masonry-grid" role="list" aria-label="Galeri portofolio tekstur dinding">
+          <figure class="masonry-item masonry-item--tall reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&auto=format&fit=crop" alt="Tekstur kamprot warna terracotta — dinding eksterior" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Kamprot Terracotta</figcaption>
+          </figure>
+          <figure class="masonry-item reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=600&q=85&auto=format&fit=crop" alt="Motif gosok halus abu-abu — interior ruang tamu" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Gosok Abu Elegan</figcaption>
+          </figure>
+          <figure class="masonry-item reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=85&auto=format&fit=crop" alt="Cat wash tembok klasik — nuansa mediterania" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Cat Wash Mediterania</figcaption>
+          </figure>
+          <figure class="masonry-item masonry-item--wide reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=85&auto=format&fit=crop" alt="Finishing dekoratif interior — ruang makan premium" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Finishing Interior Premium</figcaption>
+          </figure>
+          <figure class="masonry-item masonry-item--tall reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=600&q=85&auto=format&fit=crop" alt="Tekstur dinding kasar — karakter industrial modern" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Industrial Rough Texture</figcaption>
+          </figure>
+          <figure class="masonry-item reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=600&q=85&auto=format&fit=crop" alt="Kamar tidur dengan tekstur lembut — warna earth tone" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Earth Tone Bedroom</figcaption>
+          </figure>
+          <figure class="masonry-item reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=600&q=85&auto=format&fit=crop" alt="Dinding eksterior rumah mewah — kamprot premium" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Eksterior Kamprot Premium</figcaption>
+          </figure>
+          <figure class="masonry-item masonry-item--tall reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?w=600&q=85&auto=format&fit=crop" alt="Ruang keluarga minimalis dengan tekstur dinding halus" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Minimalis Soft Gosok</figcaption>
+          </figure>
+          <figure class="masonry-item reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1505873242700-f289a29e1724?w=600&q=85&auto=format&fit=crop" alt="Detail close-up tekstur kamprot fine — permukaan bata halus" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Kamprot Fine Detail</figcaption>
+          </figure>
+          <figure class="masonry-item masonry-item--wide reveal-up" role="listitem">
+            <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=85&auto=format&fit=crop" alt="Ruang kerja modern dengan aksen tekstur dinding abu elegan" loading="lazy" decoding="async" />
+            <figcaption class="masonry-caption">Home Office Texture Accent</figcaption>
+          </figure>
+        </div>
+
+        <div class="gallery-cta reveal-up">
+          <a href="https://www.instagram.com/cetteksture" target="_blank" rel="noopener" class="btn btn--outline">
+            <i class="fa-brands fa-instagram"></i> Lihat Lebih di Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA BANNER — "Satu Layanan, Multi Penerapan" ===================== -->
+    <section class="cta-banner" aria-labelledby="cta-title">
+      <div class="cta-banner__bg" style="background-image:url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1920&q=75&auto=format&fit=crop')" aria-hidden="true"></div>
+      <div class="cta-banner__overlay" aria-hidden="true"></div>
+      <div class="container cta-banner__inner">
+        <div class="cta-banner__text reveal-up">
+          <p class="section-eyebrow light">Satu Layanan, Banyak Wujud</p>
+          <h2 class="cta-banner__title" id="cta-title">Tekstur yang Tepat<br /><em>untuk Setiap Ruang</em></h2>
+          <p class="cta-banner__desc">Interior kamar tidur, eksterior rumah, tembok kantor, atau pagar beton — kami kerjakan semua dengan standar yang sama: rapi, tahan lama, amanah.</p>
+        </div>
+        <div class="cta-banner__cards reveal-up">
+          <div class="apply-card">
+            <div class="apply-card__icon"><i class="fa-solid fa-bed"></i></div>
+            <h3>Interior Rumah</h3>
+            <p>Kamar tidur, ruang tamu, dapur</p>
+          </div>
+          <div class="apply-card">
+            <div class="apply-card__icon"><i class="fa-solid fa-building"></i></div>
+            <h3>Eksterior & Fasad</h3>
+            <p>Pagar, tembok luar, garasi</p>
+          </div>
+          <div class="apply-card">
+            <div class="apply-card__icon"><i class="fa-solid fa-briefcase"></i></div>
+            <h3>Komersial</h3>
+            <p>Kantor, toko, restoran, kafe</p>
+          </div>
+          <div class="apply-card">
+            <div class="apply-card__icon"><i class="fa-solid fa-mosque"></i></div>
+            <h3>Fasilitas Umum</h3>
+            <p>Masjid, sekolah, gedung publik</p>
+          </div>
+        </div>
+        <div class="cta-banner__action reveal-up">
+          <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20ingin%20tanya%20apakah%20layanan%20tekstur%20dinding%20bisa%20untuk%20%5Bjenis%20ruangan%5D%20saya%3F" target="_blank" rel="noopener" class="btn btn--primary btn--large">
+            <i class="fa-brands fa-whatsapp"></i> Tanya Kesesuaian Ruangan Anda
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section id="services" class="section services-section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <p class="section-eyebrow">Apa yang Kami Kerjakan</p>
+          <h2 class="section-title" id="services-title">Layanan Tekstur<br /><em>Berkah Decoration</em></h2>
+          <p class="section-desc">Empat keahlian utama yang telah kami asah bertahun-tahun — masing-masing dengan teknik dan hasil yang berbeda.</p>
+        </div>
+
+        <div class="services-grid">
+
+          <article class="service-card reveal-up" aria-labelledby="svc-1">
+            <div class="service-card__media">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85&auto=format&fit=crop" alt="Tekstur kamprot pada dinding eksterior — butiran kasar merata" loading="lazy" decoding="async" />
+            </div>
+            <div class="service-card__body">
+              <span class="service-number">01</span>
+              <h3 id="svc-1">Cat Tekstur Kamprot</h3>
+              <p>Teknik semprot material campuran pasir/batu halus yang menciptakan permukaan bertekstur merata. Cocok untuk eksterior, tahan cuaca ekstrem, anti retak.</p>
+              <ul class="service-list">
+                <li><i class="fa-solid fa-check"></i> Varian kekasaran: halus, sedang, kasar</li>
+                <li><i class="fa-solid fa-check"></i> Interior & eksterior</li>
+                <li><i class="fa-solid fa-check"></i> Anti jamur & lumut</li>
+              </ul>
+              <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20ingin%20konsultasi%20untuk%20cat%20tekstur%20kamprot.%20Bisa%20bantu%3F" target="_blank" rel="noopener" class="service-card__cta">
+                Tanya Sekarang <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card service-card--reverse reveal-up" aria-labelledby="svc-2">
+            <div class="service-card__media">
+              <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=700&q=85&auto=format&fit=crop" alt="Motif gosok dinding — permukaan halus berkilap elegan" loading="lazy" decoding="async" />
+            </div>
+            <div class="service-card__body">
+              <span class="service-number">02</span>
+              <h3 id="svc-2">Motif Gosok</h3>
+              <p>Teknik aplikasi material plester halus yang digosok hingga menghasilkan permukaan semi-glossy dengan tampilan beton poles. Pilihan premium untuk ruang modern.</p>
+              <ul class="service-list">
+                <li><i class="fa-solid fa-check"></i> Tampilan beton poles natural</li>
+                <li><i class="fa-solid fa-check"></i> Permukaan halus & tahan lama</li>
+                <li><i class="fa-solid fa-check"></i> Ideal untuk ruang interior</li>
+              </ul>
+              <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20mau%20tahu%20lebih%20lanjut%20tentang%20motif%20gosok.%20Ada%20yang%20bisa%20bantu%20saya%3F" target="_blank" rel="noopener" class="service-card__cta">
+                Konsultasi Motif Gosok <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card reveal-up" aria-labelledby="svc-3">
+            <div class="service-card__media">
+              <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=85&auto=format&fit=crop" alt="Cat wash tembok — efek antik klasik pada dinding bata" loading="lazy" decoding="async" />
+            </div>
+            <div class="service-card__body">
+              <span class="service-number">03</span>
+              <h3 id="svc-3">Cat Wash Tembok</h3>
+              <p>Teknik aplikasi cat tipis berlapis yang memberi efek washed-out klasik, antik, dan bertekstur alami. Menghadirkan nuansa mediterania atau rustic yang hangat.</p>
+              <ul class="service-list">
+                <li><i class="fa-solid fa-check"></i> Efek antik & vintage alami</li>
+                <li><i class="fa-solid fa-check"></i> Beragam pilihan tone warna</li>
+                <li><i class="fa-solid fa-check"></i> Cocok untuk tema rustic & klasik</li>
+              </ul>
+              <a href="https://wa.me/6285137961950?text=Assalamu%27alaikum%2C%20saya%20tertarik%20dengan%20layanan%20cat%20wash%20tembok.%20Mohon%20info%20selengkapnya." target="_blank" rel="noopener" class="service-card__cta">
+                Minta Info Lengkap <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card service-card--reverse reveal-up" aria-labelledby="svc-4">
+            <div class="service-card__media">
+              <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=700&q=85&auto=format&fit=crop" alt="Finishing dekoratif interior rumah mewah — detail premium" loading="lazy" decoding="async" />
+            </div>
+            <div class="service-card__body">
+              <span class="service-number">04</span>
+              <h3 id="svc-4">Finishing Dekoratif</h3>
+              <p>Sentuhan akhir pada dinding yang mengangkat tampilan keseluruhan ruangan — kombinasi tekstur, warna, dan pola yang disesuaikan dengan konsep desain interior Anda.</p>
+              <ul class="service-list">
+                <li><i class="fa-solid fa-check"></i> Custom pattern & motif</li>
+                <li><i class="fa-solid fa-check"></i> Sesuai konsep desain interior</li>
+                <li><i class="fa-solid fa-check"></i> Interior & eksterior premium</li>
+              </ul>
+              <a href="https://wa.me/6285137961950?text=Halo%20tim%20Berkah%20Decoration%2C%20saya%20ingin%20berdiskusi%20tentang%20finishing%20dekoratif%20untuk%20proyek%20saya." target="_blank" rel="noopener" class="service-card__cta">
+                Diskusi Proyek Anda <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PRICING ===================== -->
+    <section id="pricing" class="section pricing-section" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-header reveal-up">
+          <p class="section-eyebrow">Harga Transparan</p>
+          <h2 class="section-title" id="pricing-title">Investasi yang<br /><em>Sebanding Hasilnya</em></h2>
+          <p class="section-desc">Harga sudah mencakup biaya material dan jasa aplikasi. Survey lokasi gratis, tanpa biaya tersembunyi.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <article class="pricing-card reveal-up" aria-labelledby="pkg-basic">
+            <div class="pricing-card__top">
+              <span class="pkg-badge">Hemat</span>
+              <h3 id="pkg-basic">Kamprot Basic</h3>
+              <p class="pkg-desc">Tekstur semprot standar untuk eksterior. Tahan cuaca, cepat kering, coverage luas.</p>
+            </div>
+            <div class="pricing-card__price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">140.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <ul class="pricing-list">
+              <li><i class="fa-solid fa-check"></i> Cat tekstur kamprot standar</li>
+              <li><i class="fa-solid fa-check"></i> 1 lapisan finishing</li>
+              <li><i class="fa-solid fa-check"></i> Cocok eksterior pagar & tembok</li>
+              <li><i class="fa-solid fa-check"></i> Garansi retakan 6 bulan</li>
+              <li class="muted"><i class="fa-solid fa-minus"></i> Motif custom</li>
+              <li class="muted"><i class="fa-solid fa-minus"></i> Warna premium</li>
+            </ul>
+            <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20tertarik%20paket%20Kamprot%20Basic.%20Boleh%20minta%20estimasi%20harga%20untuk%20area%20saya%3F" target="_blank" rel="noopener" class="pricing-card__cta">
+              Minta Estimasi Gratis
+            </a>
+          </article>
+
+          <article class="pricing-card pricing-card--featured reveal-up" aria-labelledby="pkg-pro">
+            <div class="pricing-card__top">
+              <span class="pkg-badge pkg-badge--featured">Paling Laris</span>
+              <h3 id="pkg-pro">Gosok & Wash Pro</h3>
+              <p class="pkg-desc">Motif gosok atau cat wash dengan hasil semi-premium. Pilihan terfavorit klien kami.</p>
+            </div>
+            <div class="pricing-card__price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">185.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <ul class="pricing-list">
+              <li><i class="fa-solid fa-check"></i> Motif gosok atau cat wash</li>
+              <li><i class="fa-solid fa-check"></i> 2 lapisan finishing</li>
+              <li><i class="fa-solid fa-check"></i> Interior & eksterior</li>
+              <li><i class="fa-solid fa-check"></i> Pilihan 5 tone warna</li>
+              <li><i class="fa-solid fa-check"></i> Garansi retakan 1 tahun</li>
+              <li><i class="fa-solid fa-check"></i> Konsultasi warna gratis</li>
+            </ul>
+            <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20ingin%20konsultasi%20untuk%20paket%20Gosok%20%26%20Wash%20Pro.%20Kapan%20bisa%20survey%20ke%20lokasi%20saya%3F" target="_blank" rel="noopener" class="pricing-card__cta pricing-card__cta--featured">
+              Jadwalkan Survey
+            </a>
+          </article>
+
+          <article class="pricing-card reveal-up" aria-labelledby="pkg-premium">
+            <div class="pricing-card__top">
+              <span class="pkg-badge pkg-badge--premium">Eksklusif</span>
+              <h3 id="pkg-premium">Finishing Premium</h3>
+              <p class="pkg-desc">Finishing dekoratif custom penuh — motif, warna, dan tekstur sesuai konsep desain interior Anda.</p>
+            </div>
+            <div class="pricing-card__price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">250.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <ul class="pricing-list">
+              <li><i class="fa-solid fa-check"></i> Full custom motif & pattern</li>
+              <li><i class="fa-solid fa-check"></i> Material premium pilihan</li>
+              <li><i class="fa-solid fa-check"></i> Konsultasi desain interior</li>
+              <li><i class="fa-solid fa-check"></i> Warna tak terbatas</li>
+              <li><i class="fa-solid fa-check"></i> Garansi 2 tahun</li>
+              <li><i class="fa-solid fa-check"></i> After-care support</li>
+            </ul>
+            <a href="https://wa.me/6285137961950?text=Halo%20Berkah%20Decoration%2C%20saya%20tertarik%20dengan%20paket%20Finishing%20Premium%20untuk%20proyek%20saya.%20Bisa%20kita%20diskusikan%3F" target="_blank" rel="noopener" class="pricing-card__cta">
+              Diskusi Proyek Premium
+            </a>
+          </article>
+
+        </div>
+
+        <p class="pricing-note reveal-up">
+          <i class="fa-solid fa-circle-info"></i>
+          Harga dapat bervariasi sesuai kondisi dinding, aksesibilitas lokasi, dan detail motif. Hubungi kami untuk estimasi akurat.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="section about-section" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-visual reveal-left">
+          <div class="about-img-main">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=85&auto=format&fit=crop" alt="Tim Berkah Decoration sedang mengerjakan proyek tekstur dinding" loading="lazy" decoding="async" />
+          </div>
+          <div class="about-img-accent">
+            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=85&auto=format&fit=crop" alt="Detail aplikasi tekstur kamprot oleh teknisi berpengalaman" loading="lazy" decoding="async" />
+          </div>
+          <div class="about-pill" aria-hidden="true">
+            <strong>7+</strong>
+            <span>Tahun Berpengalaman</span>
+          </div>
+        </div>
+        <div class="about-content reveal-right">
+          <p class="section-eyebrow">Tentang Kami</p>
+          <h2 class="section-title" id="about-title">Amanah adalah<br /><em>Standar Kami</em></h2>
+          <p class="about-lead">Berkah Decoration berdiri atas satu prinsip sederhana: setiap dinding yang kami kerjakan adalah cerminan kepercayaan yang Anda berikan kepada kami.</p>
+          <p class="about-body">Kami adalah tim tekstur dinding berpengalaman yang beroperasi di wilayah Banten dan sekitarnya. Dari proyek rumah tinggal sederhana hingga gedung komersial, kami membawa standar yang sama — teknik yang tepat, material yang berkualitas, dan hasil yang memuaskan.</p>
+          <p class="about-body">Motif gosok, kamprot, cat wash, atau finishing dekoratif — semua kami kuasai dan kami kerjakan dengan penuh tanggung jawab.</p>
+          <div class="about-values">
+            <div class="value-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <div>
+                <strong>Amanah</strong>
+                <span>Selesai tepat waktu, sesuai kesepakatan</span>
+              </div>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-award"></i>
+              <div>
+                <strong>Berkualitas</strong>
+                <span>Material terbaik, teknik terstandar</span>
+              </div>
+            </div>
+            <div class="value-item">
+              <i class="fa-solid fa-handshake"></i>
+              <div>
+                <strong>Transparan</strong>
+                <span>Harga jelas, tanpa biaya kejutan</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-contacts">
+            <a href="https://wa.me/6285137961950" target="_blank" rel="noopener" class="contact-pill">
+              <i class="fa-brands fa-whatsapp"></i> +62 851-3796-1950
+            </a>
+            <a href="https://www.instagram.com/cetteksture" target="_blank" rel="noopener" class="contact-pill">
+              <i class="fa-brands fa-instagram"></i> @cetteksture
+            </a>
+            <a href="mailto:berkah.decoration@example.com" class="contact-pill">
+              <i class="fa-regular fa-envelope"></i> berkah.decoration@example.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="section faq-section" aria-labelledby="faq-title" x-data="faqState()">
+      <div class="container">
+        <div class="faq-layout">
+          <div class="faq-intro reveal-left">
+            <p class="section-eyebrow">Pertanyaan Umum</p>
+            <h2 class="section-title" id="faq-title">Ada yang Ingin<br /><em>Anda Tanyakan?</em></h2>
+            <p class="faq-intro__desc">Kami kumpulkan pertanyaan yang paling sering diajukan klien kami. Tidak ada di sini? Langsung tanya kami via WhatsApp.</p>
+            <a href="https://wa.me/6285137961950?text=Halo%2C%20saya%20punya%20pertanyaan%20tentang%20layanan%20Berkah%20Decoration." target="_blank" rel="noopener" class="btn btn--ghost btn--compact">
+              <i class="fa-brands fa-whatsapp"></i> Tanya Langsung
+            </a>
+          </div>
+          <div class="faq-list reveal-right">
+
+            <template x-for="(item, index) in faqs" :key="index">
+              <div class="faq-item" :class="{ 'faq-item--open': activeIndex === index }">
+                <button class="faq-question" @click="toggle(index)" :aria-expanded="(activeIndex === index).toString()" :aria-controls="'faq-answer-' + index">
+                  <span x-text="item.q"></span>
+                  <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer" :id="'faq-answer-' + index" x-show="activeIndex === index" x-transition:enter="faq-enter" x-transition:enter-start="faq-enter-start" x-transition:enter-end="faq-enter-end" x-transition:leave="faq-leave" x-transition:leave-start="faq-leave-start" x-transition:leave-end="faq-leave-end" role="region">
+                  <p x-text="item.a"></p>
+                </div>
+              </div>
+            </template>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FINAL CTA ===================== -->
+    <section class="final-cta" aria-labelledby="final-cta-title">
+      <div class="final-cta__bg" style="background-image:url('https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=1920&q=75&auto=format&fit=crop')" aria-hidden="true"></div>
+      <div class="final-cta__overlay" aria-hidden="true"></div>
+      <div class="container final-cta__inner reveal-up">
+        <h2 class="final-cta__title" id="final-cta-title">Siap Mengubah Dinding<br /><em>Anda Menjadi Karya?</em></h2>
+        <p class="final-cta__desc">Survey gratis, estimasi transparan, hasil yang memuaskan. Hubungi kami sekarang dan kami respons dalam hitungan menit.</p>
+        <div class="final-cta__actions">
+          <a href="https://wa.me/6285137961950?text=Halo%20Berkah%20Decoration%21%20Saya%20mau%20minta%20survey%20gratis%20untuk%20proyek%20tekstur%20dinding%20saya." target="_blank" rel="noopener" class="btn btn--primary btn--large">
+            <i class="fa-brands fa-whatsapp"></i> Hubungi via WhatsApp
+          </a>
+          <a href="https://www.instagram.com/cetteksture" target="_blank" rel="noopener" class="btn btn--ghost btn--large">
+            <i class="fa-brands fa-instagram"></i> Lihat Portofolio
+          </a>
+        </div>
+        <div class="final-cta__meta">
+          <span><i class="fa-regular fa-clock"></i> Respons cepat, biasanya dalam 5 menit</span>
+          <span><i class="fa-solid fa-location-dot"></i> Melayani area Banten & sekitarnya</span>
+          <span><i class="fa-solid fa-star"></i> Survey lokasi gratis</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="brand-icon"><i class="fa-solid fa-house-chimney"></i></span>
+        <span class="brand-text">
+          <span class="brand-main">Berkah</span>
+          <span class="brand-sub">Decoration</span>
+        </span>
+      </div>
+      <nav class="footer__links" aria-label="Footer navigasi">
+        <a href="#gallery">Galeri</a>
+        <a href="#services">Layanan</a>
+        <a href="#pricing">Harga</a>
+        <a href="#about">Tentang</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="footer__social" aria-label="Media sosial">
+        <a href="https://www.instagram.com/cetteksture" target="_blank" rel="noopener" aria-label="Instagram Berkah Decoration"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/6285137961950" target="_blank" rel="noopener" aria-label="WhatsApp Berkah Decoration"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://www.tiktok.com/@berkahdecorationofficial" target="_blank" rel="noopener" aria-label="TikTok Berkah Decoration"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+      <p class="footer__copy">
+        &copy; 2026 Berkah Decoration. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+      /* ============================================================
+     BERKAH DECORATION — main.js
+     GSAP ScrollTrigger Animations + Alpine State
+     ============================================================ */
+  
+  /* ---- Alpine Global State ---- */
+  function appState() {
+    return {
+      atTop: true,
+      mobileOpen: false,
+      handleScroll() {
+        this.atTop = window.scrollY < 10;
+      },
+    };
+  }
+  
+  function faqState() {
+    return {
+      activeIndex: null,
+      faqs: [
+        {
+          q: 'Berapa estimasi harga tekstur dinding per meter persegi?',
+          a: 'Harga mulai dari Rp 140.000/m² untuk kamprot standar. Motif gosok dan cat wash berada di kisaran Rp 185.000/m², sedangkan finishing dekoratif premium mulai Rp 250.000/m². Semua harga sudah termasuk material dan jasa aplikasi. Hubungi kami untuk estimasi akurat sesuai kondisi lokasi Anda.'
+        },
+        {
+          q: 'Apakah bisa survey dulu sebelum memutuskan?',
+          a: 'Tentu. Kami menyediakan layanan survey lokasi gratis tanpa kewajiban apapun. Tim kami akan datang, menilai kondisi dinding, dan memberikan rekomendasi tekstur yang paling sesuai dengan konsep ruangan Anda.'
+        },
+        {
+          q: 'Berapa lama waktu pengerjaan?',
+          a: 'Tergantung luas area dan jenis tekstur. Untuk kamprot standar, rata-rata 1 m² dapat diselesaikan dalam 15–20 menit setelah persiapan permukaan. Proyek rumah tinggal rata-rata selesai dalam 2–5 hari kerja. Kami selalu komitmen pada jadwal yang disepakati.'
+        },
+        {
+          q: 'Apakah ada garansi untuk hasil pekerjaan?',
+          a: 'Ya. Paket Basic bergaransi 6 bulan, paket Pro bergaransi 1 tahun, dan paket Premium bergaransi 2 tahun untuk keretakan dan kerusakan pada hasil tekstur akibat kualitas pengerjaan. Garansi tidak mencakup kerusakan akibat force majeure atau kesalahan pengguna.'
+        },
+        {
+          q: 'Apa perbedaan kamprot dan motif gosok?',
+          a: 'Kamprot adalah teknik semprot material bertekstur yang menghasilkan permukaan kasar dan bertitik — cocok untuk eksterior dan area luar ruangan. Motif gosok menggunakan teknik aplikasi manual yang digosok untuk menghasilkan permukaan lebih halus, semi-glossy, mirip beton poles — lebih cocok untuk interior modern dan premium.'
+        },
+        {
+          q: 'Apakah bisa request warna custom?',
+          a: 'Bisa. Kami bekerja sama dengan berbagai merek cat dan material tekstur yang tersedia dalam ratusan pilihan warna. Anda juga bisa konsultasi dengan tim kami untuk mendapatkan rekomendasi warna yang cocok dengan konsep interior atau eksterior Anda.'
+        },
+        {
+          q: 'Apakah layanan tersedia di luar Banten?',
+          a: 'Saat ini kami melayani area Banten dan sekitarnya, termasuk Serang, Tangerang, dan wilayah Jabodetabek. Untuk proyek di luar area tersebut, hubungi kami terlebih dahulu untuk diskusi biaya mobilisasi.'
+        },
+      ],
+      toggle(index) {
+        this.activeIndex = this.activeIndex === index ? null : index;
+      }
+    };
+  }
+  
+  /* ---- GSAP Init ---- */
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
+    gsap.registerPlugin(ScrollTrigger);
+  
+    /* ---- Hero Entrance Sequence ---- */
+    const heroTimeline = gsap.timeline({ delay: 0.2 });
+  
+    heroTimeline
+      .fromTo('#hero-eyebrow',
+        { opacity: 0, y: 24, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.75, ease: 'power3.out' }
+      )
+      .fromTo('#hero-headline',
+        { opacity: 0, y: 40, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' },
+        '-=0.4'
+      )
+      .fromTo('#hero-sub',
+        { opacity: 0, y: 28, filter: 'blur(8px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.75, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo('#hero-actions',
+        { opacity: 0, y: 20, filter: 'blur(6px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.65, ease: 'power2.out' },
+        '-=0.4'
+      )
+      .fromTo('#hero-stats',
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
+        '-=0.3'
+      );
+  
+    /* ---- Hero Parallax (subtle) ---- */
+    const heroBg = document.querySelector('.hero__bg-img');
+    if (heroBg) {
+      gsap.to(heroBg, {
+        yPercent: 18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+    }
+  
+    /* ---- Utility: blur-to-focus scroll reveal ----
+       Ini bagian tricky — kita need make sure setiap elemen dengan class
+       reveal-* di-animate secara independent biar gak chaos pas banyak
+       elemen muncul barengan di viewport */
+    const createReveal = (selector, fromVars, toVars) => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach((el) => {
+        gsap.fromTo(el,
+          { opacity: 0, filter: 'blur(6px)', ...fromVars },
+          {
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 0.85,
+            ease: 'power3.out',
+            ...toVars,
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 88%',
+              end: 'top 60%',
+              toggleActions: 'play none none reverse',
+            }
+          }
+        );
+      });
+    };
+  
+    createReveal('.reveal-up',    { y: 40 }, { y: 0 });
+    createReveal('.reveal-left',  { x: -44 }, { x: 0 });
+    createReveal('.reveal-right', { x: 44 }, { x: 0 });
+  
+    /* ---- Staggered gallery items ----
+       Masonry items perlu stagger biar ga semua muncul bareng — ini intentional
+       supaya ada sense of depth dan movement yang engaging */
+    const masonryItems = document.querySelectorAll('.masonry-item');
+    if (masonryItems.length > 0) {
+      gsap.fromTo(masonryItems,
+        { opacity: 0, y: 30, filter: 'blur(8px)' },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: {
+            each: 0.08,
+            from: 'start',
+          },
+          scrollTrigger: {
+            trigger: '.masonry-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          }
+        }
+      );
+    }
+  
+    /* ---- Pricing cards stagger ---- */
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    if (pricingCards.length > 0) {
+      gsap.fromTo(pricingCards,
+        { opacity: 0, y: 40, filter: 'blur(5px)' },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 0.7,
+          ease: 'power2.out',
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: '.pricing-grid',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          }
+        }
+      );
+    }
+  
+    /* ---- Apply cards stagger ---- */
+    const applyCards = document.querySelectorAll('.apply-card');
+    if (applyCards.length > 0) {
+      gsap.fromTo(applyCards,
+        { opacity: 0, scale: 0.95, filter: 'blur(4px)' },
+        {
+          opacity: 1,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.55,
+          ease: 'back.out(1.4)',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.cta-banner__cards',
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          }
+        }
+      );
+    }
+  
+    /* ---- Service cards — alternate direction reveal ---- */
+    document.querySelectorAll('.service-card').forEach((card, i) => {
+      const isReverse = card.classList.contains('service-card--reverse');
+      const media = card.querySelector('.service-card__media');
+      const body = card.querySelector('.service-card__body');
+  
+      gsap.fromTo(media,
+        { opacity: 0, x: isReverse ? 60 : -60, filter: 'blur(8px)' },
+        {
+          opacity: 1, x: 0, filter: 'blur(0px)',
+          duration: 0.9, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
+          }
+        }
+      );
+  
+      gsap.fromTo(body,
+        { opacity: 0, x: isReverse ? -40 : 40, filter: 'blur(6px)' },
+        {
+          opacity: 1, x: 0, filter: 'blur(0px)',
+          duration: 0.85, ease: 'power3.out',
+          delay: 0.1,
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
+          }
+        }
+      );
+    });
+  
+    /* ---- Value items stagger in about section ---- */
+    const valueItems = document.querySelectorAll('.value-item');
+    if (valueItems.length > 0) {
+      gsap.fromTo(valueItems,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1, x: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: '.about-values',
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          }
+        }
+      );
+    }
+  
+    /* ---- Smooth active nav link highlighting ---- */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+  
+    ScrollTrigger.create({
+      trigger: 'body',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: () => {
+        let currentId = '';
+        sections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          if (sectionTop <= 100) currentId = section.id;
+        });
+  
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href').replace('#', '');
+          if (href === currentId) {
+            link.style.color = 'var(--c-gold)';
+          } else {
+            link.style.color = '';
+          }
+        });
+      }
+    });
+  
+  });
+
+  </script>
+</body>
+</html>
