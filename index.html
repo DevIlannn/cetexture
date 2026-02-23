@@ -7,101 +7,65 @@
   <meta name="theme-color" content="#1a0f00" />
   <title>Berkah Decoration — Jasa Tekstur Dinding Profesional</title>
 
-  <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-
-  <!-- Google Fonts: 3 typefaces -->
-  <!-- Display: Playfair Display — Elegan, berkarakter, cocok dekorasi -->
-  <!-- Body: DM Sans — Bersih, modern, readable -->
-  <!-- Accent/Label: Bebas Neue — Bold, industrial, impactful -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-
-  <!-- Alpine.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.1/cdn.min.js" defer></script>
 
   <style>
-      /* ============================================================
-     BERKAH DECORATION — style.css
-     Design Tokens, Base, Layout, Components
-     ============================================================ */
-  
-  /* ---- Design Tokens ---- */
   :root {
-    /* Colors */
     --c-bg:          #0e0a05;
     --c-bg-2:        #150e06;
     --c-bg-card:     #1c1208;
     --c-surface:     #231607;
     --c-border:      rgba(180, 120, 40, 0.18);
     --c-border-soft: rgba(180, 120, 40, 0.08);
-  
-    /* Brand palette */
     --c-gold:        #c8893a;
     --c-gold-light:  #e0a84e;
     --c-gold-dim:    rgba(200, 137, 58, 0.15);
     --c-terracotta:  #b85c38;
     --c-cream:       #f5ede0;
     --c-cream-dim:   rgba(245, 237, 224, 0.7);
-  
-    /* Text */
     --c-text:        #f0e6d3;
     --c-text-2:      #b8a48a;
     --c-text-3:      #7a6a52;
     --c-text-inv:    #0e0a05;
-  
-    /* Fonts */
     --f-display:     'Playfair Display', Georgia, serif;
     --f-body:        'DM Sans', system-ui, sans-serif;
     --f-label:       'Bebas Neue', Impact, sans-serif;
-  
-    /* Spacing scale */
     --sp-xs:   0.5rem;
     --sp-sm:   1rem;
     --sp-md:   1.75rem;
     --sp-lg:   3rem;
     --sp-xl:   5rem;
     --sp-2xl:  8rem;
-  
-    /* Radii */
     --r-sm:  6px;
     --r-md:  12px;
     --r-lg:  20px;
     --r-xl:  32px;
-  
-    /* Transitions */
     --t-fast:   0.18s ease;
     --t-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     --t-slow:   0.65s cubic-bezier(0.4, 0, 0.2, 1);
-  
-    /* Shadows */
     --shadow-card: 0 4px 32px rgba(0,0,0,0.5);
     --shadow-glow: 0 0 40px rgba(200, 137, 58, 0.15);
-  
-    /* Z-index layers */
     --z-nav:       100;
     --z-sidebar:   200;
     --z-overlay:   150;
   }
-  
-  /* ---- Reset & Base ---- */
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
     font-size: 16px;
     -webkit-text-size-adjust: 100%;
   }
-  
+
   body {
     font-family: var(--f-body);
     background: var(--c-bg);
@@ -110,19 +74,18 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  
+
   img {
     display: block;
     max-width: 100%;
     height: auto;
     object-fit: cover;
   }
-  
+
   a { color: inherit; text-decoration: none; }
   ul { list-style: none; }
   button { border: none; background: none; cursor: pointer; font: inherit; }
-  
-  /* ---- Skip link (a11y) ---- */
+
   .skip-link {
     position: absolute;
     left: -9999px;
@@ -137,8 +100,7 @@
     padding: 0.5rem 1rem;
     border-radius: var(--r-sm);
   }
-  
-  /* ---- Typography ---- */
+
   h1, h2, h3, h4 {
     font-family: var(--f-display);
     font-weight: 700;
@@ -146,36 +108,38 @@
     letter-spacing: -0.01em;
     color: var(--c-cream);
   }
-  
-  h1 { font-size: clamp(2.4rem, 6vw, 5.5rem); }
+
+  h1 {
+    font-size: clamp(2rem, 8vw, 5.5rem);
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
   h2 { font-size: clamp(2rem, 4.5vw, 3.6rem); }
   h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
-  
+
   em { font-style: italic; color: var(--c-gold-light); }
-  
-  /* ---- Layout helpers ---- */
+
   .container {
     width: 100%;
     max-width: 1280px;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 4vw, 3rem);
   }
-  
+
   .section {
     padding-block: var(--sp-2xl);
   }
-  
+
   .desktop-only { display: none; }
   @media (min-width: 900px) { .desktop-only { display: inline; } }
-  
-  /* ---- Section Header ---- */
+
   .section-header {
     text-align: center;
     max-width: 680px;
     margin-inline: auto;
     margin-bottom: var(--sp-xl);
   }
-  
+
   .section-eyebrow {
     font-family: var(--f-label);
     font-size: 0.95rem;
@@ -184,19 +148,17 @@
     margin-bottom: var(--sp-xs);
     text-transform: uppercase;
   }
-  
+
   .section-eyebrow.light { color: var(--c-gold-light); }
-  
   .section-title { margin-bottom: var(--sp-sm); }
-  
+
   .section-desc {
     font-size: 1.05rem;
     color: var(--c-text-2);
     max-width: 520px;
     margin-inline: auto;
   }
-  
-  /* ---- Buttons ---- */
+
   .btn {
     display: inline-flex;
     align-items: center;
@@ -210,7 +172,7 @@
     transition: var(--t-smooth);
     white-space: nowrap;
   }
-  
+
   .btn--primary {
     background: var(--c-gold);
     color: var(--c-text-inv);
@@ -221,7 +183,7 @@
     box-shadow: 0 6px 28px rgba(200,137,58,0.5);
     transform: translateY(-2px);
   }
-  
+
   .btn--ghost {
     background: transparent;
     color: var(--c-cream);
@@ -232,7 +194,7 @@
     background: rgba(245,237,224,0.07);
     transform: translateY(-2px);
   }
-  
+
   .btn--outline {
     background: transparent;
     color: var(--c-gold);
@@ -242,35 +204,32 @@
     background: var(--c-gold-dim);
     transform: translateY(-2px);
   }
-  
+
   .btn--large {
     padding: 1rem 2.5rem;
     font-size: 1.05rem;
   }
-  
+
   .btn--compact {
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
   }
-  
-  /* ============================================================
-     NAVBAR
-     ============================================================ */
+
   .navbar {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: var(--z-nav);
     transition: background var(--t-smooth), box-shadow var(--t-smooth), border-bottom var(--t-smooth);
   }
-  
-  /* Saat di paling atas — menyatu dengan hero, transparan */
+
   .navbar--top {
     background: transparent;
     border-bottom: 1px solid transparent;
     box-shadow: none;
   }
-  
-  /* Saat scroll — solid dark */
+
   .navbar--scrolled {
     background: rgba(14, 10, 5, 0.96);
     border-bottom: 1px solid var(--c-border);
@@ -278,7 +237,7 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-  
+
   .navbar__inner {
     display: flex;
     align-items: center;
@@ -286,8 +245,7 @@
     height: 72px;
     padding-inline: clamp(1.25rem, 4vw, 3rem);
   }
-  
-  /* Brand */
+
   .navbar__brand {
     display: flex;
     align-items: center;
@@ -295,12 +253,12 @@
     transition: opacity var(--t-fast);
   }
   .navbar__brand:hover { opacity: 0.85; }
-  
+
   .brand-icon {
     font-size: 1.35rem;
     color: var(--c-gold);
   }
-  
+
   .brand-text {
     display: flex;
     flex-direction: column;
@@ -320,19 +278,18 @@
     color: var(--c-gold);
     text-transform: uppercase;
   }
-  
-  /* Desktop nav links */
+
   .navbar__links {
     display: none;
     align-items: center;
     gap: 0.25rem;
   }
-  
+
   @media (min-width: 1024px) {
     .navbar__links { display: flex; }
     .navbar__burger { display: none; }
   }
-  
+
   .nav-link {
     padding: 0.5rem 0.85rem;
     font-size: 0.88rem;
@@ -345,7 +302,7 @@
     color: var(--c-cream);
     background: rgba(245,237,224,0.06);
   }
-  
+
   .nav-cta {
     display: inline-flex;
     align-items: center;
@@ -363,8 +320,7 @@
     background: var(--c-gold-light);
     transform: translateY(-1px);
   }
-  
-  /* Hamburger */
+
   .navbar__burger {
     display: flex;
     flex-direction: column;
@@ -372,6 +328,7 @@
     padding: 0.5rem;
     z-index: var(--z-nav);
   }
+
   .burger-line {
     display: block;
     width: 24px;
@@ -384,12 +341,9 @@
   .burger-line:nth-child(1).active { transform: rotate(45deg) translate(5px, 5px); }
   .burger-line:nth-child(2).active { opacity: 0; transform: scaleX(0); }
   .burger-line:nth-child(3).active { transform: rotate(-45deg) translate(5px, -5px); }
-  
+
   @media (min-width: 1024px) { .navbar__burger { display: none; } }
-  
-  /* ============================================================
-     MOBILE SIDEBAR
-     ============================================================ */
+
   .sidebar {
     position: fixed;
     inset: 0;
@@ -397,7 +351,7 @@
     pointer-events: none;
   }
   .sidebar--open { pointer-events: auto; }
-  
+
   .sidebar__overlay {
     position: absolute;
     inset: 0;
@@ -407,11 +361,11 @@
     backdrop-filter: blur(4px);
   }
   .sidebar--open .sidebar__overlay { opacity: 1; }
-  
+
   .sidebar__panel {
     position: absolute;
     top: 0; right: 0;
-    width: min(320px, 85vw);
+    width: 60vw;
     height: 100%;
     background: var(--c-bg-2);
     border-left: 1px solid var(--c-border);
@@ -423,7 +377,7 @@
     transition: transform var(--t-slow);
   }
   .sidebar--open .sidebar__panel { transform: translateX(0); }
-  
+
   .sidebar__close {
     align-self: flex-end;
     font-size: 1.35rem;
@@ -432,7 +386,7 @@
     transition: color var(--t-fast);
   }
   .sidebar__close:hover { color: var(--c-cream); }
-  
+
   .sidebar__brand {
     display: flex;
     align-items: center;
@@ -440,14 +394,14 @@
     padding-bottom: var(--sp-md);
     border-bottom: 1px solid var(--c-border-soft);
   }
-  
+
   .sidebar__links {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     flex: 1;
   }
-  
+
   .sidebar__links li a {
     display: flex;
     align-items: center;
@@ -464,7 +418,7 @@
     background: rgba(245,237,224,0.05);
   }
   .sidebar__links li a i { color: var(--c-gold); width: 20px; }
-  
+
   .sidebar__cta {
     display: flex;
     align-items: center;
@@ -479,10 +433,7 @@
     transition: var(--t-smooth);
   }
   .sidebar__cta:hover { background: var(--c-gold-light); }
-  
-  /* ============================================================
-     HERO
-     ============================================================ */
+
   .hero {
     position: relative;
     min-height: 100svh;
@@ -490,27 +441,25 @@
     align-items: center;
     overflow: hidden;
   }
-  
+
   .hero__video-wrap {
     position: absolute;
     inset: 0;
     z-index: 0;
   }
-  
-  /* Karena no actual video file, pakai full background image */
+
   .hero__bg-img {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
     will-change: transform;
-    /* Subtle parallax handled via JS */
   }
-  
+
   .hero__video {
-    display: none; /* jika ada video asli, unhide & remove bg-img */
+    display: none;
   }
-  
+
   .hero__overlay {
     position: absolute;
     inset: 0;
@@ -521,8 +470,7 @@
       rgba(30, 18, 6, 0.55) 100%
     );
   }
-  
-  /* Floating texture badges */
+
   .hero__badge {
     position: absolute;
     z-index: 5;
@@ -532,23 +480,22 @@
     backdrop-filter: blur(8px);
     border-radius: 2px;
   }
-  
+
   .badge-label {
     font-family: var(--f-label);
     font-size: 0.9rem;
     letter-spacing: 0.12em;
     color: var(--c-gold);
   }
-  
+
   .hero__badge--1 { top: 22%; right: 6%; }
   .hero__badge--2 { top: 52%; right: 10%; }
   .hero__badge--3 { top: 70%; right: 4%; }
-  
+
   @media (max-width: 768px) {
     .hero__badge { display: none; }
   }
-  
-  /* Hero content */
+
   .hero__content {
     position: relative;
     z-index: 10;
@@ -559,22 +506,29 @@
     padding-top: 120px;
     padding-bottom: var(--sp-xl);
   }
-  
+
+  @media (max-width: 480px) {
+    .hero__content {
+      padding-inline: 1.25rem;
+      padding-top: 100px;
+    }
+  }
+
   .hero__eyebrow {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 1.5rem;
-    opacity: 0; /* GSAP will animate */
+    opacity: 0;
   }
-  
+
   .eyebrow-line {
     display: block;
     width: 40px;
     height: 1.5px;
     background: var(--c-gold);
   }
-  
+
   .eyebrow-text {
     font-family: var(--f-label);
     font-size: 0.9rem;
@@ -582,37 +536,39 @@
     color: var(--c-gold);
     text-transform: uppercase;
   }
-  
+
   .hero__headline {
     margin-bottom: var(--sp-sm);
-    opacity: 0; /* GSAP will animate */
+    opacity: 0;
     text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
-  
+
   .hero__sub {
     font-size: clamp(1rem, 1.8vw, 1.2rem);
     color: var(--c-cream-dim);
     max-width: 560px;
     margin-bottom: var(--sp-md);
     line-height: 1.7;
-    opacity: 0; /* GSAP will animate */
+    opacity: 0;
   }
-  
+
   .hero__actions {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: var(--sp-xl);
-    opacity: 0; /* GSAP will animate */
+    opacity: 0;
   }
-  
+
   .hero__stats {
     display: flex;
     align-items: center;
     gap: var(--sp-md);
-    opacity: 0; /* GSAP will animate */
+    opacity: 0;
   }
-  
+
   .stat-item {
     display: flex;
     flex-direction: column;
@@ -631,14 +587,13 @@
     letter-spacing: 0.08em;
     margin-top: 0.2rem;
   }
-  
+
   .stat-divider {
     width: 1px;
     height: 36px;
     background: var(--c-border);
   }
-  
-  /* Scroll hint */
+
   .hero__scroll-hint {
     position: absolute;
     bottom: 2.5rem;
@@ -654,7 +609,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.15em;
   }
-  
+
   .scroll-mouse {
     width: 20px;
     height: 32px;
@@ -674,30 +629,26 @@
     transform: translateX(-50%);
     animation: scrollDot 1.8s ease-in-out infinite;
   }
-  
+
   @keyframes scrollDot {
     0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
     50% { opacity: 0; transform: translateX(-50%) translateY(10px); }
   }
-  
-  /* ============================================================
-     GALLERY — MASONRY
-     ============================================================ */
+
   .gallery-section {
     background: var(--c-bg-2);
   }
-  
-  /* Masonry layout menggunakan CSS Grid column-based */
+
   .masonry-grid {
     columns: 3;
     column-gap: 12px;
     orphans: 1;
     widows: 1;
   }
-  
+
   @media (max-width: 900px) { .masonry-grid { columns: 2; } }
   @media (max-width: 540px) { .masonry-grid { columns: 1; } }
-  
+
   .masonry-item {
     break-inside: avoid;
     page-break-inside: avoid;
@@ -708,8 +659,7 @@
     cursor: pointer;
     display: block;
   }
-  
-  /* Foto jpg — tanpa wrapper/card/background */
+
   .masonry-item img {
     width: 100%;
     height: auto;
@@ -717,10 +667,10 @@
     transition: transform var(--t-slow);
   }
   .masonry-item:hover img { transform: scale(1.04); }
-  
+
   .masonry-item--tall img { aspect-ratio: 3/4; object-fit: cover; }
   .masonry-item--wide { column-span: none; }
-  
+
   .masonry-caption {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -735,21 +685,18 @@
     transition: opacity var(--t-smooth);
   }
   .masonry-item:hover .masonry-caption { opacity: 1; }
-  
+
   .gallery-cta {
     text-align: center;
     margin-top: var(--sp-lg);
   }
-  
-  /* ============================================================
-     CTA BANNER
-     ============================================================ */
+
   .cta-banner {
     position: relative;
     overflow: hidden;
     padding-block: var(--sp-2xl);
   }
-  
+
   .cta-banner__bg {
     position: absolute;
     inset: 0;
@@ -757,13 +704,13 @@
     background-position: center;
     background-attachment: fixed;
   }
-  
+
   .cta-banner__overlay {
     position: absolute;
     inset: 0;
     background: rgba(14, 10, 5, 0.86);
   }
-  
+
   .cta-banner__inner {
     position: relative;
     z-index: 2;
@@ -772,7 +719,7 @@
     gap: var(--sp-lg);
     align-items: start;
   }
-  
+
   @media (min-width: 900px) {
     .cta-banner__inner {
       grid-template-columns: 1fr 1fr;
@@ -783,7 +730,7 @@
       text-align: center;
     }
   }
-  
+
   .cta-banner__title {
     margin-bottom: 1rem;
   }
@@ -792,13 +739,13 @@
     font-size: 1.05rem;
     max-width: 480px;
   }
-  
+
   .cta-banner__cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
-  
+
   .apply-card {
     padding: 1.5rem;
     border: 1px solid var(--c-border);
@@ -812,7 +759,7 @@
     background: rgba(200, 137, 58, 0.08);
     transform: translateY(-3px);
   }
-  
+
   .apply-card__icon {
     font-size: 1.5rem;
     color: var(--c-gold);
@@ -829,20 +776,17 @@
     font-size: 0.82rem;
     color: var(--c-text-3);
   }
-  
-  /* ============================================================
-     SERVICES
-     ============================================================ */
+
   .services-section {
     background: var(--c-bg);
   }
-  
+
   .services-grid {
     display: flex;
     flex-direction: column;
     gap: var(--sp-2xl);
   }
-  
+
   .service-card {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -850,10 +794,10 @@
     overflow: hidden;
     min-height: 440px;
   }
-  
+
   .service-card--reverse { direction: rtl; }
   .service-card--reverse > * { direction: ltr; }
-  
+
   @media (max-width: 768px) {
     .service-card,
     .service-card--reverse {
@@ -861,13 +805,12 @@
       direction: ltr;
     }
   }
-  
+
   .service-card__media {
     overflow: hidden;
     position: relative;
   }
-  
-  /* foto jpg — tanpa card/border/margin */
+
   .service-card__media img {
     width: 100%;
     height: 100%;
@@ -878,7 +821,7 @@
   .service-card:hover .service-card__media img {
     transform: scale(1.04);
   }
-  
+
   .service-card__body {
     padding: clamp(2rem, 5vw, 3.5rem);
     background: var(--c-bg-card);
@@ -888,7 +831,7 @@
     gap: 1.1rem;
     border: 1px solid var(--c-border-soft);
   }
-  
+
   .service-number {
     font-family: var(--f-label);
     font-size: 3.5rem;
@@ -897,18 +840,18 @@
     border: none;
     display: block;
   }
-  
+
   .service-card__body h3 {
     font-size: clamp(1.4rem, 2.5vw, 2rem);
     color: var(--c-cream);
   }
-  
+
   .service-card__body p {
     color: var(--c-text-2);
     font-size: 0.97rem;
     line-height: 1.7;
   }
-  
+
   .service-list {
     display: flex;
     flex-direction: column;
@@ -922,7 +865,7 @@
     color: var(--c-text-2);
   }
   .service-list li i { color: var(--c-gold); font-size: 0.8rem; }
-  
+
   .service-card__cta {
     display: inline-flex;
     align-items: center;
@@ -937,21 +880,18 @@
     gap: 0.85rem;
     color: var(--c-gold-light);
   }
-  
-  /* ============================================================
-     PRICING
-     ============================================================ */
+
   .pricing-section {
     background: var(--c-bg-2);
   }
-  
+
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     align-items: start;
   }
-  
+
   .pricing-card {
     background: var(--c-surface);
     border: 1px solid var(--c-border);
@@ -967,7 +907,7 @@
     transform: translateY(-4px);
     box-shadow: var(--shadow-glow);
   }
-  
+
   .pricing-card--featured {
     border-color: var(--c-gold);
     background: linear-gradient(160deg, var(--c-surface) 0%, rgba(200,137,58,0.06) 100%);
@@ -981,7 +921,7 @@
     background: linear-gradient(90deg, var(--c-terracotta), var(--c-gold), var(--c-gold-light));
     border-radius: var(--r-sm) var(--r-sm) 0 0;
   }
-  
+
   .pkg-badge {
     display: inline-block;
     padding: 0.28rem 0.75rem;
@@ -1002,7 +942,7 @@
     background: var(--c-terracotta);
     color: var(--c-cream);
   }
-  
+
   .pricing-card__top h3 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
@@ -1012,7 +952,7 @@
     color: var(--c-text-2);
     line-height: 1.6;
   }
-  
+
   .pricing-card__price {
     display: flex;
     align-items: baseline;
@@ -1038,7 +978,7 @@
     font-size: 0.85rem;
     color: var(--c-text-3);
   }
-  
+
   .pricing-list {
     display: flex;
     flex-direction: column;
@@ -1055,7 +995,7 @@
   .pricing-list li i { color: var(--c-gold); font-size: 0.8rem; }
   .pricing-list li.muted { color: var(--c-text-3); }
   .pricing-list li.muted i { color: var(--c-text-3); }
-  
+
   .pricing-card__cta {
     display: block;
     text-align: center;
@@ -1078,7 +1018,7 @@
   .pricing-card__cta--featured:hover {
     background: var(--c-gold-light);
   }
-  
+
   .pricing-note {
     text-align: center;
     margin-top: var(--sp-lg);
@@ -1090,40 +1030,36 @@
     gap: 0.5rem;
   }
   .pricing-note i { color: var(--c-gold); }
-  
-  /* ============================================================
-     ABOUT
-     ============================================================ */
+
   .about-section {
     background: var(--c-bg);
   }
-  
+
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: clamp(3rem, 6vw, 6rem);
     align-items: center;
   }
-  
+
   @media (max-width: 768px) {
     .about-grid { grid-template-columns: 1fr; }
   }
-  
+
   .about-visual {
     position: relative;
   }
-  
+
   .about-img-main {
     overflow: hidden;
   }
-  /* foto jpg — tanpa wrapper background */
   .about-img-main img {
     width: 100%;
     height: 520px;
     object-fit: cover;
     display: block;
   }
-  
+
   .about-img-accent {
     position: absolute;
     bottom: -2rem;
@@ -1137,11 +1073,11 @@
     height: 200px;
     object-fit: cover;
   }
-  
+
   @media (max-width: 768px) {
     .about-img-accent { display: none; }
   }
-  
+
   .about-pill {
     position: absolute;
     top: 2rem;
@@ -1166,14 +1102,14 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-  
+
   @media (max-width: 768px) {
     .about-pill { left: 1rem; top: 1rem; }
   }
-  
+
   .about-content { display: flex; flex-direction: column; gap: 1rem; }
   .about-content .section-title { text-align: left; margin: 0; }
-  
+
   .about-lead {
     font-family: var(--f-display);
     font-size: 1.15rem;
@@ -1181,13 +1117,13 @@
     line-height: 1.65;
     font-style: italic;
   }
-  
+
   .about-body {
     color: var(--c-text-2);
     font-size: 0.97rem;
     line-height: 1.75;
   }
-  
+
   .about-values {
     display: flex;
     flex-direction: column;
@@ -1218,14 +1154,14 @@
     color: var(--c-text-3);
     font-size: 0.85rem;
   }
-  
+
   .about-contacts {
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem;
     margin-top: 0.5rem;
   }
-  
+
   .contact-pill {
     display: inline-flex;
     align-items: center;
@@ -1243,26 +1179,23 @@
     color: var(--c-cream);
     background: var(--c-gold-dim);
   }
-  
-  /* ============================================================
-     FAQ
-     ============================================================ */
+
   .faq-section {
     background: var(--c-bg-2);
   }
-  
+
   .faq-layout {
     display: grid;
     grid-template-columns: 1fr 1.6fr;
     gap: clamp(3rem, 6vw, 6rem);
     align-items: start;
   }
-  
+
   @media (max-width: 768px) {
     .faq-layout { grid-template-columns: 1fr; }
   }
-  
-  .faq-intro { position: sticky; top: 100px; }
+
+  .faq-intro { position: relative; top: 10px; }
   .faq-intro .section-title { text-align: left; margin-bottom: 1rem; }
   .faq-intro__desc {
     color: var(--c-text-2);
@@ -1270,14 +1203,14 @@
     line-height: 1.7;
     margin-bottom: 1.5rem;
   }
-  
+
   .faq-list { display: flex; flex-direction: column; gap: 1px; }
-  
+
   .faq-item {
     border-top: 1px solid var(--c-border-soft);
   }
   .faq-item:last-child { border-bottom: 1px solid var(--c-border-soft); }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
@@ -1293,7 +1226,7 @@
     transition: color var(--t-fast);
   }
   .faq-question:hover { color: var(--c-gold-light); }
-  
+
   .faq-icon {
     font-size: 0.75rem;
     color: var(--c-gold);
@@ -1301,7 +1234,7 @@
     flex-shrink: 0;
   }
   .faq-item--open .faq-icon { transform: rotate(180deg); }
-  
+
   .faq-answer {
     padding-bottom: 1.4rem;
   }
@@ -1310,37 +1243,33 @@
     font-size: 0.95rem;
     line-height: 1.75;
   }
-  
-  /* Alpine transition classes */
+
   .faq-enter { transition: opacity 0.25s ease, transform 0.25s ease; }
   .faq-enter-start { opacity: 0; transform: translateY(-8px); }
   .faq-enter-end { opacity: 1; transform: translateY(0); }
   .faq-leave { transition: opacity 0.2s ease; }
   .faq-leave-start { opacity: 1; }
   .faq-leave-end { opacity: 0; }
-  
-  /* ============================================================
-     FINAL CTA
-     ============================================================ */
+
   .final-cta {
     position: relative;
     overflow: hidden;
     padding-block: var(--sp-2xl);
   }
-  
+
   .final-cta__bg {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
   }
-  
+
   .final-cta__overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(10,6,2,0.92), rgba(14,10,5,0.85));
   }
-  
+
   .final-cta__inner {
     position: relative;
     z-index: 2;
@@ -1350,14 +1279,14 @@
     align-items: center;
     gap: var(--sp-md);
   }
-  
+
   .final-cta__title { max-width: 640px; }
   .final-cta__desc {
     color: var(--c-text-2);
     font-size: 1.05rem;
     max-width: 540px;
   }
-  
+
   .final-cta__actions {
     display: flex;
     gap: 1rem;
@@ -1365,7 +1294,7 @@
     justify-content: center;
     margin-top: 0.5rem;
   }
-  
+
   .final-cta__meta {
     display: flex;
     gap: var(--sp-md);
@@ -1381,16 +1310,13 @@
     color: var(--c-text-3);
   }
   .final-cta__meta i { color: var(--c-gold); }
-  
-  /* ============================================================
-     FOOTER
-     ============================================================ */
+
   .footer {
     background: #080502;
     border-top: 1px solid var(--c-border-soft);
     padding-block: var(--sp-lg);
   }
-  
+
   .footer__inner {
     display: flex;
     flex-direction: column;
@@ -1398,7 +1324,7 @@
     gap: var(--sp-md);
     text-align: center;
   }
-  
+
   .footer__links {
     display: flex;
     gap: 1.5rem;
@@ -1411,7 +1337,7 @@
     transition: color var(--t-fast);
   }
   .footer__links a:hover { color: var(--c-cream); }
-  
+
   .footer__social {
     display: flex;
     gap: 1rem;
@@ -1433,15 +1359,12 @@
     color: var(--c-gold);
     background: var(--c-gold-dim);
   }
-  
+
   .footer__copy {
     font-size: 0.82rem;
     color: var(--c-text-3);
   }
-  
-  /* ============================================================
-     SCROLL REVEAL — GSAP base states
-     ============================================================ */
+
   .reveal-up {
     opacity: 0;
     transform: translateY(36px);
@@ -1457,10 +1380,7 @@
     transform: translateX(40px);
     filter: blur(4px);
   }
-  
-  /* ============================================================
-     RESPONSIVE — fine-tuning
-     ============================================================ */
+
   @media (max-width: 480px) {
     .hero__actions { flex-direction: column; }
     .hero__stats { gap: var(--sp-sm); }
@@ -1470,18 +1390,18 @@
     .final-cta__actions { flex-direction: column; align-items: stretch; }
     .final-cta__actions .btn { justify-content: center; }
   }
-  
+
   @media print {
     .navbar, .sidebar, .hero__scroll-hint, .hero__badge,
     .final-cta, .footer__social { display: none; }
     body { background: white; color: black; }
   }
-
   </style>
 </head>
 <body x-data="appState()" @scroll.window="handleScroll()">
 
-  <!-- ===================== NAVBAR ===================== -->
+  <a href="#main" class="skip-link">Lewati ke konten utama</a>
+
   <header class="navbar" :class="{ 'navbar--top': atTop, 'navbar--scrolled': !atTop }" role="banner">
     <div class="navbar__inner">
       <a href="#hero" class="navbar__brand" aria-label="Berkah Decoration Home">
@@ -1492,7 +1412,6 @@
         </span>
       </a>
 
-      <!-- Desktop Nav -->
       <nav class="navbar__links" aria-label="Navigasi utama">
         <a href="#gallery" class="nav-link">Galeri</a>
         <a href="#services" class="nav-link">Layanan</a>
@@ -1504,7 +1423,6 @@
         </a>
       </nav>
 
-      <!-- Hamburger -->
       <button class="navbar__burger" @click="mobileOpen = !mobileOpen" :aria-expanded="mobileOpen.toString()" aria-controls="mobile-sidebar" aria-label="Buka menu">
         <span class="burger-line" :class="{ 'active': mobileOpen }"></span>
         <span class="burger-line" :class="{ 'active': mobileOpen }"></span>
@@ -1513,7 +1431,6 @@
     </div>
   </header>
 
-  <!-- ===================== MOBILE SIDEBAR ===================== -->
   <aside id="mobile-sidebar" class="sidebar" :class="{ 'sidebar--open': mobileOpen }" aria-hidden="!mobileOpen" role="dialog" aria-label="Menu navigasi mobile">
     <div class="sidebar__overlay" @click="mobileOpen = false"></div>
     <nav class="sidebar__panel">
@@ -1542,18 +1459,13 @@
 
   <main id="main">
 
-    <!-- ===================== HERO ===================== -->
     <section id="hero" class="hero" aria-label="Beranda">
-      <!-- Video background -->
       <div class="hero__video-wrap" aria-hidden="true">
-        <video class="hero__video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80">
-          <!-- Fallback ke Unsplash image karena no video file -->
-        </video>
+        <video class="hero__video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80"></video>
         <div class="hero__bg-img" style="background-image:url('https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=1920&q=80&auto=format&fit=crop')"></div>
         <div class="hero__overlay" aria-hidden="true"></div>
       </div>
 
-      <!-- Floating texture badges -->
       <div class="hero__badge hero__badge--1" aria-hidden="true">
         <span class="badge-label">Kamprot</span>
       </div>
@@ -1603,14 +1515,12 @@
         </div>
       </div>
 
-      <!-- Scroll indicator -->
       <div class="hero__scroll-hint" aria-hidden="true">
         <div class="scroll-mouse"></div>
         <span>Scroll</span>
       </div>
     </section>
 
-    <!-- ===================== GALLERY SECTION ===================== -->
     <section id="gallery" class="section gallery-section" aria-labelledby="gallery-title">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1619,7 +1529,6 @@
           <p class="section-desc">Setiap proyek dikerjakan dengan ketelitian tinggi. Ini bukan sekadar cat — ini seni tekstur.</p>
         </div>
 
-        <!-- Masonry Gallery Grid -->
         <div class="masonry-grid" role="list" aria-label="Galeri portofolio tekstur dinding">
           <figure class="masonry-item masonry-item--tall reveal-up" role="listitem">
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&auto=format&fit=crop" alt="Tekstur kamprot warna terracotta — dinding eksterior" loading="lazy" decoding="async" />
@@ -1671,7 +1580,6 @@
       </div>
     </section>
 
-    <!-- ===================== CTA BANNER — "Satu Layanan, Multi Penerapan" ===================== -->
     <section class="cta-banner" aria-labelledby="cta-title">
       <div class="cta-banner__bg" style="background-image:url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=1920&q=75&auto=format&fit=crop')" aria-hidden="true"></div>
       <div class="cta-banner__overlay" aria-hidden="true"></div>
@@ -1711,7 +1619,6 @@
       </div>
     </section>
 
-    <!-- ===================== SERVICES ===================== -->
     <section id="services" class="section services-section" aria-labelledby="services-title">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1802,7 +1709,6 @@
       </div>
     </section>
 
-    <!-- ===================== PRICING ===================== -->
     <section id="pricing" class="section pricing-section" aria-labelledby="pricing-title">
       <div class="container">
         <div class="section-header reveal-up">
@@ -1894,7 +1800,6 @@
       </div>
     </section>
 
-    <!-- ===================== ABOUT ===================== -->
     <section id="about" class="section about-section" aria-labelledby="about-title">
       <div class="container about-grid">
         <div class="about-visual reveal-left">
@@ -1945,15 +1850,14 @@
             <a href="https://www.instagram.com/cetteksture" target="_blank" rel="noopener" class="contact-pill">
               <i class="fa-brands fa-instagram"></i> @cetteksture
             </a>
-            <a href="mailto:berkah.decoration@example.com" class="contact-pill">
-              <i class="fa-regular fa-envelope"></i> berkah.decoration@example.com
+            <a href="mailto:info@berkahdecorationid.com" class="contact-pill">
+              <i class="fa-regular fa-envelope"></i> info@berkahdecorationid.com
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== FAQ ===================== -->
     <section id="faq" class="section faq-section" aria-labelledby="faq-title" x-data="faqState()">
       <div class="container">
         <div class="faq-layout">
@@ -1984,7 +1888,6 @@
       </div>
     </section>
 
-    <!-- ===================== FINAL CTA ===================== -->
     <section class="final-cta" aria-labelledby="final-cta-title">
       <div class="final-cta__bg" style="background-image:url('https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=1920&q=75&auto=format&fit=crop')" aria-hidden="true"></div>
       <div class="final-cta__overlay" aria-hidden="true"></div>
@@ -2009,7 +1912,6 @@
 
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="footer" role="contentinfo">
     <div class="container footer__inner">
       <div class="footer__brand">
@@ -2038,12 +1940,6 @@
   </footer>
 
   <script>
-      /* ============================================================
-     BERKAH DECORATION — main.js
-     GSAP ScrollTrigger Animations + Alpine State
-     ============================================================ */
-  
-  /* ---- Alpine Global State ---- */
   function appState() {
     return {
       atTop: true,
@@ -2053,7 +1949,7 @@
       },
     };
   }
-  
+
   function faqState() {
     return {
       activeIndex: null,
@@ -2092,16 +1988,14 @@
       }
     };
   }
-  
-  /* ---- GSAP Init ---- */
+
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-  
+
     gsap.registerPlugin(ScrollTrigger);
-  
-    /* ---- Hero Entrance Sequence ---- */
+
     const heroTimeline = gsap.timeline({ delay: 0.2 });
-  
+
     heroTimeline
       .fromTo('#hero-eyebrow',
         { opacity: 0, y: 24, filter: 'blur(8px)' },
@@ -2127,8 +2021,7 @@
         { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' },
         '-=0.3'
       );
-  
-    /* ---- Hero Parallax (subtle) ---- */
+
     const heroBg = document.querySelector('.hero__bg-img');
     if (heroBg) {
       gsap.to(heroBg, {
@@ -2142,11 +2035,9 @@
         }
       });
     }
-  
-    /* ---- Utility: blur-to-focus scroll reveal ----
-       Ini bagian tricky — kita need make sure setiap elemen dengan class
-       reveal-* di-animate secara independent biar gak chaos pas banyak
-       elemen muncul barengan di viewport */
+
+    // bagian ini logic-nya agak tricky soalnya kita need make sure setiap elemen
+    // reveal-* di-animate secara independent biar gak chaos pas banyak elemen muncul barengan di viewport
     const createReveal = (selector, fromVars, toVars) => {
       const elements = document.querySelectorAll(selector);
       elements.forEach((el) => {
@@ -2168,14 +2059,13 @@
         );
       });
     };
-  
+
     createReveal('.reveal-up',    { y: 40 }, { y: 0 });
     createReveal('.reveal-left',  { x: -44 }, { x: 0 });
     createReveal('.reveal-right', { x: 44 }, { x: 0 });
-  
-    /* ---- Staggered gallery items ----
-       Masonry items perlu stagger biar ga semua muncul bareng — ini intentional
-       supaya ada sense of depth dan movement yang engaging */
+
+    // masonry items perlu stagger biar ga semua muncul bareng — ini intentional
+    // supaya ada sense of depth dan movement yang engaging
     const masonryItems = document.querySelectorAll('.masonry-item');
     if (masonryItems.length > 0) {
       gsap.fromTo(masonryItems,
@@ -2198,8 +2088,7 @@
         }
       );
     }
-  
-    /* ---- Pricing cards stagger ---- */
+
     const pricingCards = document.querySelectorAll('.pricing-card');
     if (pricingCards.length > 0) {
       gsap.fromTo(pricingCards,
@@ -2219,8 +2108,7 @@
         }
       );
     }
-  
-    /* ---- Apply cards stagger ---- */
+
     const applyCards = document.querySelectorAll('.apply-card');
     if (applyCards.length > 0) {
       gsap.fromTo(applyCards,
@@ -2240,13 +2128,12 @@
         }
       );
     }
-  
-    /* ---- Service cards — alternate direction reveal ---- */
-    document.querySelectorAll('.service-card').forEach((card, i) => {
+
+    document.querySelectorAll('.service-card').forEach((card) => {
       const isReverse = card.classList.contains('service-card--reverse');
       const media = card.querySelector('.service-card__media');
       const body = card.querySelector('.service-card__body');
-  
+
       gsap.fromTo(media,
         { opacity: 0, x: isReverse ? 60 : -60, filter: 'blur(8px)' },
         {
@@ -2259,7 +2146,7 @@
           }
         }
       );
-  
+
       gsap.fromTo(body,
         { opacity: 0, x: isReverse ? -40 : 40, filter: 'blur(6px)' },
         {
@@ -2274,8 +2161,7 @@
         }
       );
     });
-  
-    /* ---- Value items stagger in about section ---- */
+
     const valueItems = document.querySelectorAll('.value-item');
     if (valueItems.length > 0) {
       gsap.fromTo(valueItems,
@@ -2293,11 +2179,12 @@
         }
       );
     }
-  
-    /* ---- Smooth active nav link highlighting ---- */
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-  
+
+    // nav highlight logic ini perlu di-track secara manual karena scroll event native
+    // gak cukup akurat buat detect section boundary — makanya pake ScrollTrigger onUpdate
     ScrollTrigger.create({
       trigger: 'body',
       start: 'top top',
@@ -2308,20 +2195,19 @@
           const sectionTop = section.getBoundingClientRect().top;
           if (sectionTop <= 100) currentId = section.id;
         });
-  
+
         navLinks.forEach(link => {
-          const href = link.getAttribute('href').replace('#', '');
-          if (href === currentId) {
-            link.style.color = 'var(--c-gold)';
+          const href = link.getAttribute('href');
+          if (href === '#' + currentId) {
+            link.style.color = 'var(--c-cream)';
           } else {
             link.style.color = '';
           }
         });
       }
     });
-  
   });
-
   </script>
 </body>
 </html>
+
